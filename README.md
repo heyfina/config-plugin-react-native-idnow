@@ -1,29 +1,58 @@
-# config-plugin-react-native-idnow
+# Expo Config Plugin `react-native-idnow`
 
-Config plugin to auto configure react-native-idnow
+An [Expo config plugin](https://docs.expo.io/guides/config-plugins) for easily setting up [React Native IDnow](https://github.com/bitwala/react-native-idnow)
 
-# API documentation
+## Installation
 
-- [Documentation for the master branch](https://github.com/expo/expo/blob/master/docs/pages/versions/unversioned/sdk/config-plugin-react-native-idnow.md)
-- [Documentation for the latest stable release](https://docs.expo.io/versions/latest/sdk/config-plugin-react-native-idnow/)
+#### Prerequisites
 
-# Installation in managed Expo projects
+- App project using Expo SDK 41+.
+- Installed `expo-cli@5.0.3` or later.
+- Installed `@idnow/idnow-react-native` JavaScript libraries:
 
-For managed [managed](https://docs.expo.io/versions/latest/introduction/managed-vs-bare/) Expo projects, please follow the installation instructions in the [API documentation for the latest stable release](#api-documentation). If you follow the link and there is no documentation available then this library is not yet usable within managed projects &mdash; it is likely to be included in an upcoming Expo SDK release.
-
-# Installation in bare React Native projects
-
-For bare React Native projects, you must ensure that you have [installed and configured the `react-native-unimodules` package](https://github.com/expo/expo/tree/master/packages/react-native-unimodules) before continuing.
-
-### Add the package to your npm dependencies
+#### With `expo install`
 
 ```
+expo install config-plugin-react-native-idnow
+```
+
+#### Without `expo install`
+
+```sh
+# using yarn
+yarn add config-plugin-react-native-idnow
+
+# using npm
 npm install config-plugin-react-native-idnow
 ```
 
+Open your `app.json` and update your `plugins` section (`expo install` would do it for you):
 
+```json
+{
+  "plugins": ["config-plugin-react-native-idnow"]
+}
+```
 
+## Building and running
 
-# Contributing
+You can either:
 
-Contributions are very welcome! Please refer to guidelines described in the [contributing guide]( https://github.com/expo/expo#contributing).
+- use `expo prebuild` or `expo run:android`/`expo run:ios` to update your native projects,
+- use _[EAS Build](https://docs.expo.io/build/introduction/)_ to build your development client.
+
+## Contributing
+
+Contributions are very welcome! The package uses `expo-module-scripts` for most tasks. You can find detailed information [at this link](https://github.com/expo/expo/tree/master/packages/expo-module-scripts#-config-plugin).
+
+Please make sure to run `yarn build`/`yarn rebuild` to update the `build` directory before pushing. The CI will fail otherwise.
+
+## Credits
+
+- [@_the heyfina team_](https://github.com/heyfina)
+
+- <https://github.com/expo/config-plugins>
+
+## License
+
+MIT
