@@ -1,6 +1,6 @@
 {
   "name": "config-plugin-react-native-idnow",
-  "version": "1.1.1",
+  "version": "1.1.8",
   "description": "Config plugin to auto configure react-native-idnow",
   "main": "build/withIDnow.js",
   "types": "build/withIDnow.d.ts",
@@ -14,7 +14,7 @@
     "clean": "expo-module clean",
     "lint": "expo-module lint",
     "test": "expo-module test",
-    "prepare": "expo-module prepare",
+    "prepare": "expo-module prepare && cp ./src/RNIdnow.h ./build && cp ./src/RNIdnow.m ./build",
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module"
   },

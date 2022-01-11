@@ -106,13 +106,13 @@ function addRNIdNowFiles(projectRoot, { filePaths, project, projectName, }) {
             projectName,
         });
     }
-    addSwiftwFile({
-        fileRelativePath: "./plugins/idnow/Void.swift",
-        projectRoot,
-        sourceRoot,
-        project,
-        projectName,
-    });
+    // addSwiftwFile({
+    //   fileRelativePath: "./plugins/idnow/Void.swift",
+    //   projectRoot,
+    //   sourceRoot,
+    //   project,
+    //   projectName,
+    // });
     return project;
 }
 exports.addRNIdNowFiles = addRNIdNowFiles;
