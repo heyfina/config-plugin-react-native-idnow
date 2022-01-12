@@ -106,13 +106,6 @@ function addRNIdNowFiles(projectRoot, { filePaths, project, projectName, }) {
             projectName,
         });
     }
-    // addSwiftwFile({
-    //   fileRelativePath: "./plugins/idnow/Void.swift",
-    //   projectRoot,
-    //   sourceRoot,
-    //   project,
-    //   projectName,
-    // });
     return project;
 }
 exports.addRNIdNowFiles = addRNIdNowFiles;
@@ -144,20 +137,6 @@ const addHFile = (file) => {
             addFileToProject({ project, file }) {
                 project.addToPbxFileReferenceSection(file);
             },
-        });
-    }
-};
-const addSwiftwFile = (file) => {
-    let { fileRelativePath, projectRoot, sourceRoot, project, projectName } = file;
-    const fileName = (0, path_1.basename)(fileRelativePath);
-    const sourceFilepath = (0, path_1.resolve)(projectRoot, fileRelativePath);
-    const destinationFilepath = (0, path_1.resolve)(sourceRoot, "..", fileName);
-    (0, fs_1.copyFileSync)(sourceFilepath, destinationFilepath);
-    if (!project.hasFile(`${projectName}/${fileName}`)) {
-        project = config_plugins_1.IOSConfig.XcodeUtils.addBuildSourceFileToGroup({
-            filepath: fileName,
-            groupName: projectName,
-            project,
         });
     }
 };
