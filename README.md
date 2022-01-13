@@ -13,24 +13,24 @@ An [Expo config plugin](https://docs.expo.io/guides/config-plugins) for easily s
 #### With `expo install`
 
 ```
-expo install config-plugin-react-native-idnow
+expo install @heyfina/config-plugin-react-native-idnow
 ```
 
 #### Without `expo install`
 
 ```sh
 # using yarn
-yarn add config-plugin-react-native-idnow
+yarn add @heyfina/config-plugin-react-native-idnow
 
 # using npm
-npm install config-plugin-react-native-idnow
+npm install @heyfina/config-plugin-react-native-idnow
 ```
 
 Open your `app.json` and update your `plugins` section (`expo install` would do it for you):
 
 ```json
 {
-  "plugins": ["config-plugin-react-native-idnow"]
+  "plugins": ["@heyfina/config-plugin-react-native-idnow"]
 }
 ```
 
