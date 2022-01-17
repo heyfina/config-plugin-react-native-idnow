@@ -324,8 +324,8 @@ const applyPackagingOptionsAndConfigurations = (appBuildGradle: string) => {
         exclude("META-INF/*.kotlin_module")
         exclude 'META-INF/proguard/androidx-annotations.pro'
     }
-    configurations {
-      all*.exclude module: 'bcprov-jdk15to18'
+    configurations.all {
+      exclude module: 'bcprov-jdk15to18'
     }
 }`;
 
