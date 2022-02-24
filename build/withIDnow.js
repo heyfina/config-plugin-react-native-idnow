@@ -21,12 +21,12 @@ const withPodfileUpdate = (config) => {
                     "enable_user_defined_build_types!",
                 ]);
                 podfile = addLines(podfile, "config = use_native_modules!", 1, [
-                    "  pod 'IDnowSDK', '~> 5', :build_type => :static_framework",
-                    "  pod 'AFNetworking', '~> 4.0', :modular_headers => true",
-                    "  pod 'FLAnimatedImage', '~> 1.0', :modular_headers => true",
-                    "  pod 'libPhoneNumber-iOS', '~> 0.9', :modular_headers => true",
-                    "  pod 'Masonry', '~> 1.1.0', :modular_headers => true",
-                    "  pod 'SocketRocket', '~> 0.5.1', :modular_headers => true",
+                    "  pod 'IDnowSDK', '5.1.6', :build_type => :static_framework",
+                    "  pod 'AFNetworking', '4.0.1', :modular_headers => true",
+                    "  pod 'FLAnimatedImage', '1.0.16', :modular_headers => true",
+                    "  pod 'libPhoneNumber-iOS', '0.9.15', :modular_headers => true",
+                    "  pod 'Masonry', '1.1.0', :modular_headers => true",
+                    "  pod 'SocketRocket', '0.5.1', :modular_headers => true",
                     "",
                 ]);
                 //Fix from https://github.com/idnow/de.idnow.ios#cocoapods--xcode-9
@@ -200,7 +200,7 @@ const applyImplementation = (appBuildGradle) => {
 // Add the following to allprojects/repositories in android/build.gradle
 const applyRepositories = (appBuildGradle) => {
     const idnowRepositories = `maven {
-        url "https://raw.githubusercontent.com/idnow/de.idnow.android.sdk/master"            
+        url "https://raw.githubusercontent.com/idnow/de.idnow.android.sdk/master"
      }
      maven {
         url "https://raw.githubusercontent.com/idnow/de.idnow.android/de.idnow.android-5.0.12.1"
@@ -233,8 +233,8 @@ const applyPackagingOptionsAndConfigurations = (appBuildGradle) => {
         exclude("META-INF/*.kotlin_module")
         exclude 'META-INF/proguard/androidx-annotations.pro'
     }
-    configurations {
-      all*.exclude module: 'bcprov-jdk15to18'
+    configurations.all {
+      exclude module: 'bcprov-jdk15to18'
     }
 }`;
     // Make sure the project does not have the packagingOptions already
@@ -270,4 +270,4 @@ const withIDnow = (expoConfig) => {
     expoConfig = withXCodeProjectUpdate(expoConfig);
     return expoConfig;
 };
-exports.default = (0, config_plugins_1.createRunOncePlugin)(withIDnow, "IDNowSDK", "1.0.0");
+exports.default = (0, config_plugins_1.createRunOncePlugin)(withIDnow, "IDNowSDK", "1.0.2");
