@@ -1,4 +1,4 @@
-import { ConfigPlugin, XcodeProject } from "@expo/config-plugins";
+import { ConfigPlugin, XcodeProject } from '@expo/config-plugins';
 export declare function addRNIdNowFiles(projectRoot: string, { filePaths, project, projectName, }: {
     filePaths: string[];
     project: XcodeProject;

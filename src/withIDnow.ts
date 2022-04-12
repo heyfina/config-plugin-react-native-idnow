@@ -13,52 +13,52 @@ import {
   XcodeProject,
   IOSConfig,
   ExportedConfigWithProps,
-} from "@expo/config-plugins";
-import { Stream } from "stream";
-import { ExpoConfig } from "@expo/config-types";
-import { copyFileSync, PathLike, promises } from "fs";
-import { basename, resolve, join } from "path";
-import { IFile } from "./file";
+} from '@expo/config-plugins';
+import { Stream } from 'stream';
+import { ExpoConfig } from '@expo/config-types';
+import { copyFileSync, PathLike, promises } from 'fs';
+import { basename, resolve, join } from 'path';
+import { IFile } from './file';
 
 const { getMainApplicationOrThrow } = AndroidConfig.Manifest;
 
 // updating ios...
 const withPodfileUpdate = (config: ExpoConfig) => {
   return withDangerousMod(config, [
-    "ios",
+    'ios',
     async (config) => {
       await editPodfile(config, (podfile: any) => {
         // Fix for an error taken from here
         // https://dev.to/kylefoo/xcode-12-new-build-system-warns-multiple-commands-produce-assets-car-56im
         // solution (2)
-        podfile = addLines(podfile, "platform :ios", 1, [
+        podfile = addLines(podfile, 'platform :ios', 1, [
           "install! 'cocoapods', :disable_input_output_paths => true",
           "plugin 'cocoapods-user-defined-build-types'",
-          "",
-          "enable_user_defined_build_types!",
+          '',
+          'enable_user_defined_build_types!',
         ]);
-        podfile = addLines(podfile, "config = use_native_modules!", 1, [
+        podfile = addLines(podfile, 'config = use_native_modules!', 1, [
           "  pod 'IDnowSDK', '5.1.6', :build_type => :static_framework",
           "  pod 'AFNetworking', '4.0.1', :modular_headers => true",
           "  pod 'FLAnimatedImage', '1.0.16', :modular_headers => true",
           "  pod 'libPhoneNumber-iOS', '0.9.15', :modular_headers => true",
           "  pod 'Masonry', '1.1.0', :modular_headers => true",
           "  pod 'SocketRocket', '0.5.1', :modular_headers => true",
-          "",
+          '',
         ]);
 
         //Fix from https://github.com/idnow/de.idnow.ios#cocoapods--xcode-9
-        podfile = addLines(podfile, "react_native_post_install", 2, [
-          "",
+        podfile = addLines(podfile, 'react_native_post_install', 2, [
+          '',
           // 'post_install do |installer|', // this was used before a similar section started being included on the podFile
           `    copy_pods_resources_path = "Pods/Target Support Files/Pods-${config.modRequest.projectName}/Pods-${config.modRequest.projectName}-resources.sh"`, // '	string_to_replace = \'--compile "${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"\'',
-          "    string_to_replace = 'if [[ $line != \"${PODS_ROOT}*\" ]]; then'", // '	assets_compile_with_app_icon_arguments = \'--compile "${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}" --app-icon "${ASSETCATALOG_COMPILER_APPICON_NAME}" --output-partial-info-plist "${BUILD_DIR}/assetcatalog_generated_info.plist"\'',
+          '    string_to_replace = \'if [[ $line != "${PODS_ROOT}*" ]]; then\'', // '	assets_compile_with_app_icon_arguments = \'--compile "${BUILT_PRODUCTS_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}" --app-icon "${ASSETCATALOG_COMPILER_APPICON_NAME}" --output-partial-info-plist "${BUILD_DIR}/assetcatalog_generated_info.plist"\'',
           '    assets_compile_with_app_icon_arguments = \'if [[ $line != "${PODS_ROOT}*" && $line != *"Sample"* ]]; then\'',
-          "    text = File.read(copy_pods_resources_path)",
-          "    new_contents = text.gsub(string_to_replace, assets_compile_with_app_icon_arguments)",
+          '    text = File.read(copy_pods_resources_path)',
+          '    new_contents = text.gsub(string_to_replace, assets_compile_with_app_icon_arguments)',
           '    File.open(copy_pods_resources_path, "w") {|file| file.puts new_contents }',
           // 'end', // this was used before a similar section started being included on the podFile
-          "",
+          '',
         ]);
         return podfile;
       });
@@ -71,21 +71,21 @@ async function editPodfile(
   config: ExportedConfigWithProps<unknown>,
   action: { (podfile: any): any; (arg0: string): any }
 ) {
-  const podfilePath = join(config.modRequest.platformProjectRoot, "Podfile");
+  const podfilePath = join(config.modRequest.platformProjectRoot, 'Podfile');
   try {
     const podfile = action(await readFileAsync(podfilePath));
 
     return await saveFileAsync(podfilePath, podfile);
   } catch (e) {
     WarningAggregator.addWarningIOS(
-      "idnow",
+      'idnow',
       `Couldn't modified Podfile - ${e}.`
     );
   }
 }
 
 async function readFileAsync(path: PathLike | promises.FileHandle) {
-  return promises.readFile(path, "utf8");
+  return promises.readFile(path, 'utf8');
 }
 
 async function saveFileAsync(
@@ -97,7 +97,7 @@ async function saveFileAsync(
     | AsyncIterable<string | NodeJS.ArrayBufferView>
     | Stream
 ) {
-  return promises.writeFile(path, content, "utf8");
+  return promises.writeFile(path, content, 'utf8');
 }
 
 function addLines(
@@ -106,7 +106,7 @@ function addLines(
   offset: number,
   toAdd: string[]
 ) {
-  const lines = content.split("\n");
+  const lines = content.split('\n');
 
   let lineIndex = lines.findIndex((line: string) => line.match(find));
 
@@ -115,11 +115,11 @@ function addLines(
     lineIndex++;
   }
 
-  return lines.join("\n");
+  return lines.join('\n');
 }
 
-const ERROR_MSG_PREFIX = "An error occurred while configuring iOS project. ";
-const filePaths = ["./plugins/idnow/RNIdnow"];
+const ERROR_MSG_PREFIX = 'An error occurred while configuring iOS project. ';
+const filePaths = ['./plugins/idnow/RNIdnow'];
 
 const withXCodeProjectUpdate = (config: ExpoConfig) => {
   return withXcodeProject(config, (config) => {
@@ -150,14 +150,14 @@ export function addRNIdNowFiles(
   const sourceRoot = IOSConfig.Paths.getSourceRoot(projectRoot);
   for (const fileRelativePath of filePaths) {
     addMFile({
-      fileRelativePath: fileRelativePath + ".m",
+      fileRelativePath: fileRelativePath + '.m',
       projectRoot,
       sourceRoot,
       project,
       projectName,
     });
     addHFile({
-      fileRelativePath: fileRelativePath + ".h",
+      fileRelativePath: fileRelativePath + '.h',
       projectRoot,
       sourceRoot,
       project,
@@ -172,7 +172,7 @@ const addMFile = (file: IFile) => {
     file;
   const fileName = basename(fileRelativePath);
   const sourceFilepath = resolve(projectRoot, fileRelativePath);
-  const destinationFilepath = resolve(sourceRoot, "..", fileName);
+  const destinationFilepath = resolve(sourceRoot, '..', fileName);
 
   copyFileSync(sourceFilepath, destinationFilepath);
   if (!project.hasFile(`${projectName}/${fileName}`)) {
@@ -188,7 +188,7 @@ const addHFile = (file: IFile) => {
     file;
   const fileName = basename(fileRelativePath);
   const sourceFilepath = resolve(projectRoot, fileRelativePath);
-  const destinationFilepath = resolve(sourceRoot, "..", fileName);
+  const destinationFilepath = resolve(sourceRoot, '..', fileName);
 
   copyFileSync(sourceFilepath, destinationFilepath);
   if (!project.hasFile(`${projectName}/${fileName}`)) {
@@ -206,22 +206,22 @@ const addHFile = (file: IFile) => {
 // updating android...
 // Update AndroidManifest by adding xmlns:tools to the manifest tag and tools:replace to the application tag
 const applyManifestConfig = async (
-  config: Pick<ExpoConfig, "android">,
+  config: Pick<ExpoConfig, 'android'>,
   androidManifest: AndroidConfig.Manifest.AndroidManifest
 ): Promise<AndroidConfig.Manifest.AndroidManifest> => {
   // Get the <application /> tag and assert if it doesn't exist.
   const mainApplication = getMainApplicationOrThrow(androidManifest);
   const manifest = androidManifest.manifest;
   const xmlnsTools = {
-    "xmlns:tools": "http://schemas.android.com/tools",
+    'xmlns:tools': 'http://schemas.android.com/tools',
   };
   const toolsReplace = {
-    "tools:replace":
-      "android:name,android:icon,android:theme,android:allowBackup",
+    'tools:replace':
+      'android:name,android:icon,android:theme,android:allowBackup',
   };
 
   // Add xmlns:tools attribute to the manifest tag
-  if (!manifest.$.hasOwnProperty("xmlns:tools")) {
+  if (!manifest.$.hasOwnProperty('xmlns:tools')) {
     manifest.$ = {
       ...manifest.$,
       ...xmlnsTools,
@@ -229,7 +229,7 @@ const applyManifestConfig = async (
   }
 
   // Add tools:replace attribute to the application tag
-  if (!mainApplication.$.hasOwnProperty("tools:replace")) {
+  if (!mainApplication.$.hasOwnProperty('tools:replace')) {
     mainApplication.$ = {
       ...mainApplication.$,
       ...toolsReplace,
@@ -305,7 +305,7 @@ const applyRepositories = (appBuildGradle: string) => {
 
 //exclude section
 const applyPackagingOptionsAndConfigurations = (appBuildGradle: string) => {
-  const idnowPackagingOptions = `android {
+  const idnowPackagingOptions = `\nandroid {
     packagingOptions {
         exclude "org.bouncycastle"
         exclude 'org/bouncycastle/x509/CertPathReviewerMessages_de.properties'
@@ -375,4 +375,4 @@ const withIDnow: ConfigPlugin = (expoConfig: ExpoConfig) => {
   return expoConfig;
 };
 
-export default createRunOncePlugin(withIDnow, "IDNowSDK", "1.0.2");
+export default createRunOncePlugin(withIDnow, 'IDNowSDK', '1.0.3');
