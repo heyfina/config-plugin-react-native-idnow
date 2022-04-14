@@ -376,4 +376,4 @@ const withIDnow: ConfigPlugin = (expoConfig: ExpoConfig) => {
   return expoConfig;
 };
 
-export default createRunOncePlugin(withIDnow, 'IDNowSDK', '1.0.4');
+export default createRunOncePlugin(withIDnow, 'IDNowSDK', '1.0.7');

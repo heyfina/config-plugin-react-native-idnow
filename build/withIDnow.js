@@ -272,4 +272,4 @@ const withIDnow = (expoConfig) => {
     expoConfig = withXCodeProjectUpdate(expoConfig);
     return expoConfig;
 };
-exports.default = (0, config_plugins_1.createRunOncePlugin)(withIDnow, 'IDNowSDK', '1.0.4');
+exports.default = (0, config_plugins_1.createRunOncePlugin)(withIDnow, 'IDNowSDK', '1.0.7');
