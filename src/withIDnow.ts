@@ -119,7 +119,7 @@ function addLines(
 }
 
 const ERROR_MSG_PREFIX = 'An error occurred while configuring iOS project. ';
-const filePaths = ['./plugins/idnow/RNIdnow'];
+const filePaths = ['./RNIdnow'];
 
 const withXCodeProjectUpdate = (config: ExpoConfig) => {
   return withXcodeProject(config, (config) => {
@@ -375,4 +375,4 @@ const withIDnow: ConfigPlugin = (expoConfig: ExpoConfig) => {
   return expoConfig;
 };
 
-export default createRunOncePlugin(withIDnow, 'IDNowSDK', '1.0.3');
+export default createRunOncePlugin(withIDnow, 'IDNowSDK', '1.0.4');
