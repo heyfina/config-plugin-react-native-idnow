@@ -77,7 +77,9 @@ const ERROR_MSG_PREFIX = 'An error occurred while configuring iOS project. ';
 const filePaths = ['./RNIdnow'];
 const withXCodeProjectUpdate = (config) => {
     return (0, config_plugins_1.withXcodeProject)(config, (config) => {
-        addRNIdNowFiles(config.modRequest.projectRoot, {
+        addRNIdNowFiles({
+            projectRoot: config.modRequest.projectRoot,
+            currentDir: __dirname,
             filePaths,
             project: config.modResults,
             projectName: config.modRequest.projectName,
@@ -85,22 +87,22 @@ const withXCodeProjectUpdate = (config) => {
         return config;
     });
 };
-function addRNIdNowFiles(projectRoot, { filePaths, project, projectName, }) {
+function addRNIdNowFiles({ projectRoot, currentDir, filePaths, project, projectName, }) {
     if (!projectName) {
         throw new Error(ERROR_MSG_PREFIX + `Unable to find iOS project name.`);
     }
     const sourceRoot = config_plugins_1.IOSConfig.Paths.getSourceRoot(projectRoot);
     for (const fileRelativePath of filePaths) {
         addMFile({
-            fileRelativePath: fileRelativePath + '.m',
-            projectRoot,
+            fileRelativePath: fileRelativePath + ".m",
+            currentDir,
             sourceRoot,
             project,
             projectName,
         });
         addHFile({
-            fileRelativePath: fileRelativePath + '.h',
-            projectRoot,
+            fileRelativePath: fileRelativePath + ".h",
+            currentDir,
             sourceRoot,
             project,
             projectName,
@@ -110,10 +112,10 @@ function addRNIdNowFiles(projectRoot, { filePaths, project, projectName, }) {
 }
 exports.addRNIdNowFiles = addRNIdNowFiles;
 const addMFile = (file) => {
-    let { fileRelativePath, projectRoot, sourceRoot, project, projectName } = file;
+    let { fileRelativePath, currentDir, sourceRoot, project, projectName } = file;
     const fileName = (0, path_1.basename)(fileRelativePath);
-    const sourceFilepath = (0, path_1.resolve)(projectRoot, fileRelativePath);
-    const destinationFilepath = (0, path_1.resolve)(sourceRoot, '..', fileName);
+    const sourceFilepath = (0, path_1.resolve)(currentDir, fileRelativePath);
+    const destinationFilepath = (0, path_1.resolve)(sourceRoot, "..", fileName);
     (0, fs_1.copyFileSync)(sourceFilepath, destinationFilepath);
     if (!project.hasFile(`${projectName}/${fileName}`)) {
         project = config_plugins_1.IOSConfig.XcodeUtils.addBuildSourceFileToGroup({
@@ -124,10 +126,10 @@ const addMFile = (file) => {
     }
 };
 const addHFile = (file) => {
-    let { fileRelativePath, projectRoot, sourceRoot, project, projectName } = file;
+    let { fileRelativePath, currentDir, sourceRoot, project, projectName } = file;
     const fileName = (0, path_1.basename)(fileRelativePath);
-    const sourceFilepath = (0, path_1.resolve)(projectRoot, fileRelativePath);
-    const destinationFilepath = (0, path_1.resolve)(sourceRoot, '..', fileName);
+    const sourceFilepath = (0, path_1.resolve)(currentDir, fileRelativePath);
+    const destinationFilepath = (0, path_1.resolve)(sourceRoot, "..", fileName);
     (0, fs_1.copyFileSync)(sourceFilepath, destinationFilepath);
     if (!project.hasFile(`${projectName}/${fileName}`)) {
         project = config_plugins_1.IOSConfig.XcodeUtils.addFileToGroupAndLink({
@@ -270,4 +272,4 @@ const withIDnow = (expoConfig) => {
     expoConfig = withXCodeProjectUpdate(expoConfig);
     return expoConfig;
 };
-exports.default = (0, config_plugins_1.createRunOncePlugin)(withIDnow, 'IDNowSDK', '1.0.4');
+exports.default = (0, config_plugins_1.createRunOncePlugin)(withIDnow, 'IDNowSDK', '1.0.7');

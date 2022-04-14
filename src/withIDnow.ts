@@ -123,7 +123,9 @@ const filePaths = ['./RNIdnow'];
 
 const withXCodeProjectUpdate = (config: ExpoConfig) => {
   return withXcodeProject(config, (config) => {
-    addRNIdNowFiles(config.modRequest.projectRoot, {
+    addRNIdNowFiles({
+      projectRoot: config.modRequest.projectRoot,
+      currentDir: __dirname,
       filePaths,
       project: config.modResults,
       projectName: config.modRequest.projectName,
@@ -132,33 +134,34 @@ const withXCodeProjectUpdate = (config: ExpoConfig) => {
   });
 };
 
-export function addRNIdNowFiles(
-  projectRoot: string,
-  {
-    filePaths,
-    project,
-    projectName,
-  }: {
-    filePaths: string[];
-    project: XcodeProject;
-    projectName: string | undefined;
-  }
-): XcodeProject {
+export function addRNIdNowFiles({
+  projectRoot,
+  currentDir,
+  filePaths,
+  project,
+  projectName,
+}: {
+  projectRoot: string;
+  currentDir: string;
+  filePaths: string[];
+  project: XcodeProject;
+  projectName: string | undefined;
+}): XcodeProject {
   if (!projectName) {
     throw new Error(ERROR_MSG_PREFIX + `Unable to find iOS project name.`);
   }
   const sourceRoot = IOSConfig.Paths.getSourceRoot(projectRoot);
   for (const fileRelativePath of filePaths) {
     addMFile({
-      fileRelativePath: fileRelativePath + '.m',
-      projectRoot,
+      fileRelativePath: fileRelativePath + ".m",
+      currentDir,
       sourceRoot,
       project,
       projectName,
     });
     addHFile({
-      fileRelativePath: fileRelativePath + '.h',
-      projectRoot,
+      fileRelativePath: fileRelativePath + ".h",
+      currentDir,
       sourceRoot,
       project,
       projectName,
@@ -168,11 +171,10 @@ export function addRNIdNowFiles(
 }
 
 const addMFile = (file: IFile) => {
-  let { fileRelativePath, projectRoot, sourceRoot, project, projectName } =
-    file;
+  let { fileRelativePath, currentDir, sourceRoot, project, projectName } = file;
   const fileName = basename(fileRelativePath);
-  const sourceFilepath = resolve(projectRoot, fileRelativePath);
-  const destinationFilepath = resolve(sourceRoot, '..', fileName);
+  const sourceFilepath = resolve(currentDir, fileRelativePath);
+  const destinationFilepath = resolve(sourceRoot, "..", fileName);
 
   copyFileSync(sourceFilepath, destinationFilepath);
   if (!project.hasFile(`${projectName}/${fileName}`)) {
@@ -184,11 +186,10 @@ const addMFile = (file: IFile) => {
   }
 };
 const addHFile = (file: IFile) => {
-  let { fileRelativePath, projectRoot, sourceRoot, project, projectName } =
-    file;
+  let { fileRelativePath, currentDir, sourceRoot, project, projectName } = file;
   const fileName = basename(fileRelativePath);
-  const sourceFilepath = resolve(projectRoot, fileRelativePath);
-  const destinationFilepath = resolve(sourceRoot, '..', fileName);
+  const sourceFilepath = resolve(currentDir, fileRelativePath);
+  const destinationFilepath = resolve(sourceRoot, "..", fileName);
 
   copyFileSync(sourceFilepath, destinationFilepath);
   if (!project.hasFile(`${projectName}/${fileName}`)) {
@@ -375,4 +376,4 @@ const withIDnow: ConfigPlugin = (expoConfig: ExpoConfig) => {
   return expoConfig;
 };
 
-export default createRunOncePlugin(withIDnow, 'IDNowSDK', '1.0.4');
+export default createRunOncePlugin(withIDnow, 'IDNowSDK', '1.0.7');
