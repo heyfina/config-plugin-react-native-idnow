@@ -57,6 +57,7 @@
 	// this was breaking so I commented it
 	// self.settings.ignoreCompanyID = options[@"ignoreCompanyID"];
 	self.settings.forceModalPresentation = options[@"forceModalPresentation"];
+	self.settings.enableWaitingScreenCustomised = options[@"enableWaitingScreenCustomised"];
 	// this was breaking so I commented it
 	// self.settings.showIdentTokenOnCheckScreen = options[@"showIdentTokenOnCheckScreen"];
 
