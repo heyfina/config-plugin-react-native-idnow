@@ -1,6 +1,6 @@
 {
   "name": "@heyfina/config-plugin-react-native-idnow",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Config plugin to auto configure react-native-idnow",
   "main": "build/withIDnow.js",
   "types": "build/withIDnow.d.ts",
@@ -27,8 +27,8 @@
     "preset": "expo-module-scripts"
   },
   "dependencies": {
-    "@expo/config-plugins": "^4.0.15",
-    "@expo/config-types": "^43.0.1"
+    "@expo/config-plugins": "4.1.1",
+    "@expo/config-types": "44.0.0"
   },
   "devDependencies": {
     "expo-module-scripts": "^2.0.0"

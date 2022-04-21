@@ -21,7 +21,7 @@ const withPodfileUpdate = (config) => {
                     'enable_user_defined_build_types!',
                 ]);
                 podfile = addLines(podfile, 'config = use_native_modules!', 1, [
-                    "  pod 'IDnowSDK', '5.1.6', :build_type => :static_framework",
+                    "  pod 'IDnowSDK', '5.1.9', :build_type => :static_framework",
                     "  pod 'AFNetworking', '4.0.1', :modular_headers => true",
                     "  pod 'FLAnimatedImage', '1.0.16', :modular_headers => true",
                     "  pod 'libPhoneNumber-iOS', '0.9.15', :modular_headers => true",
@@ -272,4 +272,4 @@ const withIDnow = (expoConfig) => {
     expoConfig = withXCodeProjectUpdate(expoConfig);
     return expoConfig;
 };
-exports.default = (0, config_plugins_1.createRunOncePlugin)(withIDnow, 'IDNowSDK', '1.0.10');
+exports.default = (0, config_plugins_1.createRunOncePlugin)(withIDnow, 'IDNowSDK', '1.0.11');
