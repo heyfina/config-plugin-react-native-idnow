@@ -1,6 +1,6 @@
 {
   "name": "@heyfina/config-plugin-react-native-idnow",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Config plugin to auto configure react-native-idnow",
   "main": "build/withIDnow.js",
   "types": "build/withIDnow.d.ts",
