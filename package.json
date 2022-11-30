@@ -1,46 +1,46 @@
 {
-  "name": "@heyfina/config-plugin-react-native-idnow",
-  "version": "1.0.11",
-  "description": "Config plugin to auto configure react-native-idnow",
-  "main": "build/withIDnow.js",
-  "types": "build/withIDnow.d.ts",
-  "sideEffects": false,
-  "files": [
-    "build",
-    "app.plugin.js"
-  ],
-  "scripts": {
-    "build": "expo-module build",
-    "clean": "expo-module clean",
-    "lint": "expo-module lint",
-    "test": "expo-module test",
-    "prepare": "expo-module prepare && cp ./src/RNIdnow.h ./build && cp ./src/RNIdnow.m ./build",
-    "prepublishOnly": "expo-module prepublishOnly",
-    "expo-module": "expo-module"
-  },
-  "keywords": [
-    "react-native",
-    "expo",
-    "IDnow"
-  ],
-  "jest": {
-    "preset": "expo-module-scripts"
-  },
-  "dependencies": {
-    "@expo/config-plugins": "^5.0.1",
-    "@expo/config-types": "^46.0.2"
-  },
-  "devDependencies": {
-    "expo-module-scripts": "^2.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/heyfina/config-plugin-react-native-idnow.git"
-  },
-  "author": "heyfina",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/heyfina/config-plugin-react-native-idnow/issues"
-  },
-  "homepage": "https://github.com/heyfina/config-plugin-react-native-idnow#readme"
+	"name": "@heyfina/config-plugin-react-native-idnow",
+	"version": "1.0.15",
+	"description": "Config plugin to auto configure react-native-idnow",
+	"main": "build/withIDnow.js",
+	"types": "build/withIDnow.d.ts",
+	"sideEffects": false,
+	"files": [
+		"build",
+		"app.plugin.js"
+	],
+	"scripts": {
+		"build": "expo-module build",
+		"clean": "expo-module clean",
+		"lint": "expo-module lint",
+		"test": "expo-module test",
+		"prepare": "expo-module prepare && cp ./src/RNIdnow.h ./build && cp ./src/RNIdnow.m ./build",
+		"prepublishOnly": "expo-module prepublishOnly",
+		"expo-module": "expo-module"
+	},
+	"keywords": [
+		"react-native",
+		"expo",
+		"IDnow"
+	],
+	"jest": {
+		"preset": "expo-module-scripts"
+	},
+	"dependencies": {
+		"@expo/config-plugins": "^5.0.1",
+		"@expo/config-types": "^46.0.2"
+	},
+	"devDependencies": {
+		"expo-module-scripts": "^2.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/heyfina/config-plugin-react-native-idnow.git"
+	},
+	"author": "heyfina",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/heyfina/config-plugin-react-native-idnow/issues"
+	},
+	"homepage": "https://github.com/heyfina/config-plugin-react-native-idnow#readme"
 }
