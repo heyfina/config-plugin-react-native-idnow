@@ -6,8 +6,8 @@ An [Expo config plugin](https://docs.expo.io/guides/config-plugins) for easily s
 
 #### Prerequisites
 
-- App project using Expo SDK 43+.
-- Installed `expo-cli@5.0.3` or later.
+- App project using Expo SDK 46+.
+- Installed `expo-cli@6.0.8` or later.
 - Installed `idnow-react-native` JavaScript libraries.
 
 #### With `expo install`
