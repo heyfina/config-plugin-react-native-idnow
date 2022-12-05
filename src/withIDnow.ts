@@ -38,7 +38,7 @@ const withPodfileUpdate = (config: ExpoConfig) => {
           'enable_user_defined_build_types!',
         ]);
         podfile = addLines(podfile, 'config = use_native_modules!', 1, [
-          "  pod 'IDnowSDK', '6.0.0', :build_type => :static_framework",
+          "  pod 'IDnowSDK', '6.1.0', :build_type => :static_framework",
           "  pod 'AFNetworking', '4.0.1', :modular_headers => true",
           "  pod 'FLAnimatedImage', '1.0.17', :modular_headers => true",
           "  pod 'libPhoneNumber-iOS', '0.9.15', :modular_headers => true",
