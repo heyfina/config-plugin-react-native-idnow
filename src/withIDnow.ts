@@ -246,9 +246,11 @@ const applyPackage = (mainApplication: string) => {
 
   // Make sure the project does not have the settings already
   if (!mainApplication.includes(idnowPackageImport)) {
+
+    //finde the line that says package <package_name> and add idnow import afterwards
     mainApplication = mainApplication.replace(
-      /package com.heyfina.app;/,
-      `package com.heyfina.app;\n${idnowPackageImport}`
+      /package ([\w].*);/,
+      `package $1;\n\n${idnowPackageImport}`
     );
   }
 
