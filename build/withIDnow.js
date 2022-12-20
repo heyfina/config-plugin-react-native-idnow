@@ -175,7 +175,8 @@ const applyPackage = (mainApplication) => {
     const idnowPackageImport = `import com.bitwala.idnow.RNIdnowPackage;\n`;
     // Make sure the project does not have the settings already
     if (!mainApplication.includes(idnowPackageImport)) {
-        mainApplication = mainApplication.replace(/package com.heyfina.app;/, `package com.heyfina.app;\n${idnowPackageImport}`);
+        //finde the line that says package <package_name> and add idnow import afterwards
+        mainApplication = mainApplication.replace(/package ([\w].*);/, `package $1;\n\n${idnowPackageImport}`);
     }
     return mainApplication;
 };
